@@ -1,0 +1,11 @@
+{
+  "mongodb": {
+    "uri": "mongodb://127.0.0.1:27017/imager",
+    "debug": true
+  },
+  "aws": {
+    "access_key_id": "",
+    "secret": "",
+    "s3_bucket": ""
+  }
+}

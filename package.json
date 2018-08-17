@@ -1,0 +1,23 @@
+{
+  "name": "imager-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=dev node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.291.0",
+    "body-parser": "^1.18.3",
+    "config": "^2.0.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "glob": "^7.1.2",
+    "mongoose": "^5.2.8",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7"
+  }
+}
