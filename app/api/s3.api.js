@@ -22,6 +22,7 @@ api.get('/s3/signed-url',
             return res.json(success({signedRequest, name: fileName, url}));
         }
         catch (err) {
+            console.log(err);
             res.json(fail(err.message));
         }
     }
