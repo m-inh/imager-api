@@ -15,7 +15,7 @@ function createS3SignedUrl({fileName, fileType, expired, acl, action}) {
         Key: fileName,
         Expires: expired || 600,
         ContentType: fileType,
-        ACL: acl || 'public-read'
+        ACL: acl
     };
 
     return new Promise((resolve, reject) => {
