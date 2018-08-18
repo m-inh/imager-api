@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const db = require('./database');
 
-const port = process.env.NODE_ENV || 3001;
+const port = process.env.PORT || 3001;
 
 db.connect(config.get('mongodb.uri'))
     .then((msg) => {
