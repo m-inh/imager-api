@@ -23,9 +23,9 @@ api.get('/images',
             // );
 
             const testImage = images.pop();
-            const testUrl = await createS3SignedUrl({fileName: testImage.name, fileType: "image/png", action: "getObject"});
+            const {signedRequest} = await createS3SignedUrl({fileName: testImage.name, fileType: "image/png", action: "getObject"});
             const testPayload = {
-                url: testUrl,
+                url: signedRequest,
                 author: testImage.author,
                 caption: testImage.caption
             };
