@@ -14,9 +14,14 @@ function createS3SignedUrl({fileName, fileType, expired, acl, action}) {
         Bucket: S3_BUCKET,
         Key: fileName,
         Expires: expired || 600,
-        ContentType: fileType,
-        ACL: acl
     };
+
+    if (action === 'putObject') {
+        s3Params["ContentType"] = fileType;
+        s3Params["ACL"] = acl;
+    } else if (action === 'getObject') {
+        // ko lam gi ca
+    }
 
     return new Promise((resolve, reject) => {
         return s3.getSignedUrl(action, s3Params, (err, data) => {
@@ -34,6 +39,13 @@ function createS3SignedUrl({fileName, fileType, expired, acl, action}) {
 }
 
 function getS3Url({fileName}) {
+
+    // s3.getSignedUrl('getObject', {
+    //     Bucket: myBucket,
+    //     Key: myKey,
+    //     Expires: signedUrlExpireSeconds
+    // })
+
     return `https://${S3_BUCKET}.s3.amazonaws.com/${encodeURIComponent(fileName)}`;
 }
 
