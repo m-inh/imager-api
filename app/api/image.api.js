@@ -22,16 +22,23 @@ api.get('/images',
             //     (img) => ({url: getS3Url({fileName: img.name}), author: img.author, caption: img.caption})
             // );
 
-            const testImage = images.pop();
-            const {signedRequest} = await createS3SignedUrl({fileName: testImage.name, fileType: "image/png", action: "getObject"});
-            const testPayload = {
-                url: signedRequest,
-                author: testImage.author,
-                caption: testImage.caption
-            };
+            const signedImagePromises = images.map(
+                async image => {
+                    const {signedRequest} = await createS3SignedUrl({fileName: image.name, fileType: "image/png", action: "getObject"});
+                    const imgPayload = {
+                        url: signedRequest,
+                        author: image.author,
+                        caption: image.caption
+                    };
+
+                    return Promise.resolve(imgPayload)
+                }
+            );
+
+            const imagesPayload = await Promise.all(signedImagePromises);
 
             // return res.json(success({images: s3Urls}));
-            return res.json(success({images: [testPayload]}));
+            return res.json(success({images: imagesPayload}));
         }
         catch (err) {
             res.json(fail(err.message));
