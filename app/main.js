@@ -8,8 +8,10 @@ const cors = require('cors');
 const db = require('./database');
 
 const port = process.env.PORT || 3001;
+const mongoUri = config.get('mongodb.uri');
+console.log('mongoUri', mongoUri);
 
-db.connect(config.get('mongodb.uri'))
+db.connect(mongoUri)
     .then((msg) => {
         console.log(msg);
 
